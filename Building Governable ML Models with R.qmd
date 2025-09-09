@@ -1,0 +1,60 @@
+---
+title: Building Governable ML Models with R
+subtitle: posit::conf 2025
+description: |
+  Supporting materials for the talk "Building Governable ML Models
+  with R," presented as part of the Putting it into Production block
+  at posit::conf 2025.
+author:
+  - name: |
+      <a href="https://tshafer.com">Tom Shafer</a>,<br>
+      Principal Data Scientist
+    affiliation: 
+      - name: Elder Research
+        city: Raleigh
+        state: NC
+        country: USA
+        url: https://www.elderresearch.com
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: assets/styles.css
+    title-block-banner: true
+    toc: true
+    toc-location: left
+    toc-title: Contents
+    self-contained: true
+    link-external-icon: true
+    link-external-newwindow: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: false
+---
+
+<!-- Introduction here -->
+
+<!-- Add the talk video here once published. -->
+
+## About
+
+*Content to be added*
+
+## Presentation Materials
+
+*Content to be added*
+
+## Code Examples
+
+*Content to be added*
+
+## Resources
+
+*Content to be added*
+
+## Contact
+
+*Content to be added*

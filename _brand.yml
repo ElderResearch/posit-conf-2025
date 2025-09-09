@@ -1,0 +1,14 @@
+meta:
+  name: Elder Research
+  links:
+    home: https://www.elderresearch.com
+    github: https://github.com/ElderResearch/
+
+color:
+  palette:
+    mediumblue: "#005E7B"
+    lightblue: "#008CA5"
+    darkred: "#D0073A"
+  primary: mediumblue
+  secondary: lightblue
+  tertiary: darkred
