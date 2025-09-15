@@ -1,0 +1,104 @@
+---
+title: Working with the **classifyr** Package
+subtitle: posit::conf 2025
+description: |
+  Supporting material for the talk
+  "Building Governable ML Models with R."
+author:
+  - name: |
+      <a href="https://tshafer.com">Tom Shafer</a>,<br>
+      Principal Data Scientist
+    affiliation: 
+      - name: Elder Research
+        city: Raleigh
+        state: NC
+        country: USA
+        url: https://www.elderresearch.com
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: assets/styles.css
+    title-block-banner: true
+    toc: true
+    toc-location: left
+    self-contained: true
+    link-external-icon: true
+    link-external-newwindow: true
+    code-copy: false
+    other-links:
+      - text: Talk Supplement
+        href: ./
+      - text: Elder Research
+        href: https://www.elderresearch.com
+    code-links:
+      - text: Example Package
+        href: https://github.com/ElderResearch/posit-conf-2025-governable-r-models/tree/main/classifyr
+execute:
+  echo: true
+  warning: true
+  error: true
+  message: false
+---
+
+
+### Use the example package, even without installing
+
+We use `export_all = FALSE` to simulate how R behaves when calling `library`.
+
+```{r}
+#| label: load-all
+devtools::load_all("classifyr", export_all = FALSE)
+```
+
+### Train the model
+
+We have a simple function to "train" a two-stage model:
+
+```{r}
+#| label: train-model
+
+model <- train_classifyr(iris, target = "Species")
+```
+
+This object is a `list` with a custom `class` attribute tacked onto the
+front:
+
+```{r}
+#| label: show-attrs
+attr(model, which = "class")
+```
+
+Because we've defined a custom `print` method,
+though---`print.classifyr_model()`---we can control how the object is
+printed or displayed in settings where a string representation is
+needed: 
+
+```{r}
+#| label: print-model
+model
+```
+
+### Generate predictions
+
+We have defined a `predict` method as well, so we can use the model just
+like any other in R:
+
+```{r}
+#| label: run-model
+preds <- predict(model, iris)
+head(preds, n = 3)
+```
+
+### Explain the model
+
+Finally, maybe we'd like to add other functionality. Here we've (1)
+created and (2) defined a new `explain` method:
+
+```{r}
+#| label: explain-model
+
+explns <- explain(model, preds, iris)
+head(explns, n = 5)
+```

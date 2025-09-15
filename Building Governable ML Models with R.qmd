@@ -2,9 +2,8 @@
 title: Building Governable ML Models with R
 subtitle: posit::conf 2025
 description: |
-  Supporting materials for the talk "Building Governable ML Models
-  with R," presented as part of the Putting it into Production block
-  at posit::conf 2025.
+  Supporting materials for the talk
+  "Building Governable ML Models with R."
 author:
   - name: |
       <a href="https://tshafer.com">Tom Shafer</a>,<br>
@@ -25,36 +24,474 @@ format:
     toc: true
     toc-location: left
     toc-title: Contents
+    toc-expand: true
     self-contained: true
     link-external-icon: true
     link-external-newwindow: true
+    code-copy: false
+    other-links:
+      - text: Example Package Application
+        href: ./examples.html
+      - text: Elder Research
+        href: https://www.elderresearch.com
+    code-links:
+      - text: Example Package
+        href: https://github.com/ElderResearch/posit-conf-2025-governable-r-models/tree/main/classifyr
 execute:
   echo: true
-  warning: false
+  warning: true
+  error: true
   message: false
-  cache: false
+  cache: true
 ---
 
-<!-- Introduction here -->
+<!-- Presentation video will go here when available. -->
 
-<!-- Add the talk video here once published. -->
+## The talk in more detail
 
-## About
+It isn't possible to fit all the details I'd want to include into
+twenty minutes, so I've included additional notes and other
+information below, organized by "section" of the talk.
 
-*Content to be added*
+### Introduction
 
-## Presentation Materials
+The idea behind this talk is that a model won't produce real value to
+the business unless it gets deployed and *stays* deployed over time.
 
-*Content to be added*
+All the various post-deployment maintenance and upgrade activities
+that happen over time fall under the heading of **model governance**,
+and, over the long run, a lot of these "governance" activities involve
+the code that produces the model, not just the model objects
+themselves.
 
-## Code Examples
+#### On scaffolding code 
 
-*Content to be added*
+In our experience there can be quite a bit of support or "scaffolding"
+code needed to produce a working model: code that trains the model,
+code that evaluates the model in various out-of-sample contexts, and
+code that runs model inference. In the project that inspired this
+talk, our data science team wrote a collection of "stub" files that
+relied on a project-specific R package and were themselves
+orchestrated as part of a production pipeline. These stubs trained the
+model, performed inference, interacted with
+[MLflow](http://mlflow.org/), and more.
 
-## Resources
+In this case, organizing our work within an R package centralized all
+of this extra code and made it easy to keep the package working over
+time (for example, regularly running `R CMD check` via GitHub
+Actions).
 
-*Content to be added*
+#### R and Python
 
-## Contact
+All the principles I mention in this talk---centering on packages,
+writing basic documentation and tests, and making code legible---are
+equally applicable to R and Python, but *how* they manifest is
+slightly different. In the project mentioned above, we used R's S3
+object system to define common methods like `print()`, `predict()`,
+and `explain()` for our model, which was in fact a bundle of trainable
+objects.
 
-*Content to be added*
+
+### Packaging model code
+
+As I say in the talk, packaging is foundational because it provides a
+structure for our model's scaffolding and it provides a base for
+automation. I suppose the canonical package for creating and working
+with packages is [`usethis`](https://usethis.r-lib.org/), which I used
+to make the example [`classifyr`][pkg] package in this repo:
+
+[pkg]: https://github.com/ElderResearch/posit-conf-2025-governable-r-models/tree/main/classifyr
+
+```r
+usethis::create_package("classifyr")
+```
+
+The `usethis` package has loads of other functionality, too, for
+adding files, tests, and all kinds of other useful things.
+
+#### Development tools
+
+Once we have a package, the [`devtools`](https://devtools.r-lib.org/)
+package provides a suite of utilities for checking, building, and
+otherwise working with a package. In particular:
+
+- `devtools::document()` converts special code comments into compiled
+  R documentation, which then become available in the help pane, via code
+  completion, etc.
+
+- `devtools::test()` finds and runs any included tests.
+
+Additionally, `devtools::check()` inspects our package from top to
+bottom: It recompiles documentation, runs tests, and performs a slew
+of other checks to make sure the package behaves properly. This is
+especially nice when running under a continuous integration (CI) or
+continuous deployment (CD) framework, where we run `devtools::check()`
+automatically when the package is changed to catch problems early.
+
+Here's the output for our example `classifyr` package: The command
+builds documentation, runs tests, and makes sure the package can be
+loaded and run---along with many other checks.
+
+```r
+devtools::check("classifyr")
+```
+<details>
+<summary>Package Check Output</summary>
+```
+══ Documenting ═════════════════════════════════════════════════════════════════
+ℹ Updating classifyr documentation
+ℹ Loading classifyr
+
+══ Building ════════════════════════════════════════════════════════════════════
+Setting env vars:
+• CFLAGS    : -Wall -pedantic -fdiagnostics-color=always
+• CXXFLAGS  : -Wall -pedantic -fdiagnostics-color=always
+• CXX11FLAGS: -Wall -pedantic -fdiagnostics-color=always
+• CXX14FLAGS: -Wall -pedantic -fdiagnostics-color=always
+• CXX17FLAGS: -Wall -pedantic -fdiagnostics-color=always
+• CXX20FLAGS: -Wall -pedantic -fdiagnostics-color=always
+── R CMD build ─────────────────────────────────────────────────────────────────
+✔  checking for file ‘<...>/classifyr/DESCRIPTION’ ...
+─  preparing ‘classifyr’:
+✔  checking DESCRIPTION meta-information ...
+─  checking for LF line-endings in source and make files and shell scripts
+─  checking for empty or unneeded directories
+─  building ‘classifyr_0.1.0.tar.gz’
+   Warning: invalid uid value replaced by that for user 'nobody'
+   Warning: invalid gid value replaced by that for user 'nobody'
+   
+══ Checking ════════════════════════════════════════════════════════════════════
+Setting env vars:
+• _R_CHECK_CRAN_INCOMING_REMOTE_               : FALSE
+• _R_CHECK_CRAN_INCOMING_                      : FALSE
+• _R_CHECK_FORCE_SUGGESTS_                     : FALSE
+• _R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_: FALSE
+• NOT_CRAN                                     : true
+── R CMD check ─────────────────────────────────────────────────────────────────
+─  using log directory ‘<...>/classifyr.Rcheck’
+─  using R version 4.5.1 (2025-06-13)
+─  using platform: aarch64-apple-darwin20
+─  R was compiled by
+       Apple clang version 16.0.0 (clang-1600.0.26.6)
+       GNU Fortran (GCC) 14.2.0
+─  running under: macOS Sequoia 15.6.1
+─  using session charset: UTF-8
+─  using options ‘--no-manual --as-cran’
+✔  checking for file ‘classifyr/DESCRIPTION’
+─  this is package ‘classifyr’ version ‘0.1.0’
+─  package encoding: UTF-8
+✔  checking package namespace information ...
+✔  checking package dependencies (866ms)
+✔  checking if this is a source package ...
+✔  checking if there is a namespace
+✔  checking for executable files ...
+✔  checking for hidden files and directories
+✔  checking for portable file names ...
+✔  checking for sufficient/correct file permissions
+✔  checking serialization versions
+✔  checking whether package ‘classifyr’ can be installed (746ms)
+✔  checking installed package size ...
+✔  checking package directory ...
+✔  checking for future file timestamps ...
+✔  checking DESCRIPTION meta-information ...
+✔  checking top-level files ...
+✔  checking for left-over files
+✔  checking index information
+✔  checking package subdirectories ...
+✔  checking code files for non-ASCII characters ...
+✔  checking R files for syntax errors ...
+✔  checking whether the package can be loaded ...
+✔  checking whether the package can be loaded with stated dependencies ...
+✔  checking whether the package can be unloaded cleanly ...
+✔  checking whether the namespace can be loaded with stated dependencies ...
+✔  checking whether the namespace can be unloaded cleanly ...
+✔  checking loading without being on the library search path ...
+✔  checking dependencies in R code ...
+✔  checking S3 generic/method consistency ...
+✔  checking replacement functions ...
+✔  checking foreign function calls ...
+✔  checking R code for possible problems (1.3s)
+✔  checking Rd files ...
+✔  checking Rd metadata ...
+✔  checking Rd line widths ...
+✔  checking Rd cross-references ...
+✔  checking for missing documentation entries ...
+✔  checking for code/documentation mismatches ...
+✔  checking Rd \usage sections ...
+✔  checking Rd contents ...
+✔  checking for unstated dependencies in examples ...
+─  checking examples ... NONE
+✔  checking for unstated dependencies in ‘tests’ ...
+─  checking tests ...
+✔  Running ‘testthat.R’ (455ms)
+✔  checking for non-standard things in the check directory
+✔  checking for detritus in the temp directory
+   
+   
+── R CMD check results ──────────────────────────────────── classifyr 0.1.0 ────
+Duration: 6.9s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+```
+</details>
+
+Finally, if we're interested in building a package to deploy
+somewhere, rather than working with the directory tree locally,
+devtools provides `devtools::build()` to bundle up our package for
+distribution via a package manager, S3, or some other means.
+
+#### Using a package
+
+Once we have a working, tested model, we can use it just like we'd
+expect. If the package has been built and installed on our
+system (or is otherwise available), it's usable just like any other package:
+
+```{r}
+#| label: train-1
+#| output: false
+
+library(classifyr)
+train_classifyr(data = iris, target = "Species")
+```
+
+If we don't want to build a package artifact, we can use `devtools`
+again to load the package from an accessible disk and then use the
+package functionality as usual:
+
+```{r}
+#| label: train-2
+#| output: false
+devtools::load_all("./classifyr", export_all = FALSE)
+train_classifyr(data = iris, target = "Species")
+```
+
+### Writing documentation
+
+These days, R package documentation is generally handled by
+[`roxygen2`](https://roxygen2.r-lib.org/), and that's what R packages
+are set up for with `usethis` and `devtools`.
+
+In our model-governance scenario, as opposed to the case where we
+would be releasing a package publicly, it's likely that we can see
+most of the value of documentation with little effort. By simply
+documenting function names, inputs, and outputs---and then by
+including additional descriptions or documentation for
+project-specific or potentially confusing functionality---we can set
+ourselves and our team up for success later.
+
+This is all pretty easy with `roxygen2`; we just add some special
+comments like `#'` above our functions:
+
+```r
+#' Train our example classifier model
+#'
+#' @param data A data frame with inputs and targets.
+#' @param target A column name in data.
+#' @param features Column names to use as features. If `NULL`, use all non-target columns.
+#'
+#' @returns A `classifyr_model` object.
+#' @export
+train_classifyr <- function(data, target, features = NULL) {
+  # ...
+}
+```
+
+
+These comments include: function name, description, parameters, return value, and the `@export` tag to make the function available when the package is loaded.
+
+- A title for our function
+- Descriptions of the input parameters
+- What return values users should expect
+- An "export" declaration, making the function available for use
+
+There are plenty of other things we *could* do, but this basic setup
+provides most of the benefit.
+
+### Testing
+
+Testing steers us away from a vibes-based approach ("This seems about
+right") and towards something more rigorous. This has obvious benefits
+in terms of governance, where tests help ensure our code works the way
+we expect both (1) when we write it originally and (2) later on, when
+dependencies change or we fix bugs, add features, or retrain.
+
+Testing is especially important in the second context, when a model
+remains in use and changes accumulate over a long time. The model
+referenced earlier has been in use for several years, so having tests
+in place have provided confidence that we'll know when we break
+something important while making changes. And the longer we work on a
+model, or the more code we add, the easier it is to make a change that
+impacts another part of the model we didn't expect.
+
+#### Snapshots
+
+It's easy to start testing by establishing "snapshot" tests of key
+functionality (like model training and inference) or particularly
+complex code (merges, operating on missing values). Snapshots are
+implemented by the [`testthat`](https://testthat.r-lib.org/) package;
+we can write them in three steps:
+
+1. Select a deterministic input.
+2. Capture the output generated from the inputs.
+3. Store the output for later comparisons.
+
+This is demonstrated below, in a snippet taken from our example
+`classifyr` package (and using [`withr`](https://withr.r-lib.org/) to
+help wrangle state):
+
+```{r, eval=FALSE}
+#| label: test-example
+test_that("Training is reproducible", {                  
+  withr::local_seed(137)                                 # <1>
+  output <- train_classifyr(iris, target = "Species")    # <2>
+  expect_snapshot(unclass(output))                       # <3>
+})
+```
+
+1. Establish reproducibility with random seeds.
+2. Capture the output using known, fixed inputs.
+3. Compare the result to a known good output.
+
+The first time we run the test, `testthat` writes the snapshot to a
+Markdown stored _inside_ our package. Every time thereafter the results
+are compared to the Markdown file.
+
+<details>
+<summary>Example Snapshot Output</summary>
+
+```md
+# Training is reproducible
+
+    Code
+      unclass(output)
+    Message
+      Training classifyr model
+      Bundling models into a single object
+    Output
+      $preprocessor
+      [1] 682402
+      
+      $model
+      [1] 508797
+      
+      $target
+      [1] "Species"
+      
+      $features
+      [1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" 
+```
+
+</details>
+
+### Writing legible code
+
+Some of the time we're able to write models that are pretty simple
+from an execution perspective: a single boosted tree, a neural network.
+Other times, we train collections of models or multi-stage models, and
+making use of these objects is more complicated. In these situations
+we can use R's S3 object system to make accessing and working with
+these objects a little easier and a lot clearer---which can pay off
+when we have to work with the code again later down the line.
+
+In the project that inspired this talk, for example, we had a
+two-stage model; each stage had trainable parameters, and the two
+models cascaded into one another. The most obvious way to work with
+such an object is with lists:
+
+```r
+model <- list(stage1 = model1, stage2 = model2)
+```
+
+Then we can build scripts and custom functions that work with the
+various list elements directly:
+
+```r
+# Inference for part 1, via predict()
+inf1 <- predict(model[[1]], newdata)
+
+# Inference for part 2, with custom functions and predict()
+newdata2 <- prepare_data_for_modeling(newdata, inf1)
+inf2 <- predict(model[[2]], newdata2)
+
+# Return some kind of unified prediction
+bundle_predictions(inf1, inf2, newdata, newdata2)
+```
+
+A better practice would be to bundle all of the above into a single
+prediction function, say, `predict_custom()`. But we can do even
+better by changing this custom prediction function into a prediction
+*method*, one which behaves just like any R user would expect:
+
+```r
+predictions <- predict(model, newdata)
+```
+
+All we have to do is wrap our model list with a custom `class`
+attribute and give the appropriate funny name to our predict function:
+
+```r
+# Tag the model object with a new class
+structure(
+  list(stage1 = model1, stage2 = model2),
+  class = c("example_model", "list")
+)
+```
+```r
+# Enable predict() with these objects
+predict.example_model <- function(object, newdata, ...) {
+  ...
+}
+```
+
+Could we get away without using S3? Yes---absolutely. But if we are
+organizing our training and inference code into functions anyway, it
+costs very little effort to adapt to these conventions. I expect this
+lowers the barrier to understanding a little bit when the code needs
+to be read or modified later. A little goes a long way, but defining
+often-used methods like `predict()` or `print()` can be very helpful.
+
+#### Building entirely new methods
+
+Defining entirely new methods isn't much harder than what we showed
+above, though perhaps this isn't as obviously useful. Still, we've
+experimented with methods like `explain()` for producing model
+explanations; doing so just takes an additional function call:
+
+```r
+# UseMethod() sets up the method to be defined and applied
+explain <- function(x, ...) {
+  UseMethod("explain")
+}
+
+# Define for our example model using the dot in the name
+explain.example_model <- function(x, data, ...) {
+  ...
+}
+```
+
+## About Elder Research
+
+
+Elder Research is where deep analytics expertise meets mission-driven
+execution.
+
+For three decades, we’ve helped government agencies and commercial
+organizations solve their toughest data challenges---from fraud
+detection and insider threats to demand forecasting and operational
+AI.
+
+What sets us apart? We don’t just analyze data---we build solutions
+you can trust, act on, and scale. Solutions that work because we spot
+the real issues, guide the delivery, and bring your team with us every
+step of the way.
+
+We’re guided by five values that shape how we show up for our clients
+and each other:
+
+1. **Humility**. We listen to understand.
+2. **Teamwork**. We collaborate with others.
+3. **Leadership**. We think of others first.
+4. **Integrity**. We choose truth over expediency.
+5. **Passion**. We continuously learn.
+
+Learn more at <https://www.elderresearch.com/>.

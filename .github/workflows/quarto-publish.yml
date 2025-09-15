@@ -27,7 +27,9 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Render Quarto
-        run: quarto render "Building Governable ML Models with R.qmd" --to html --output index.html
+        run: |
+          quarto render "Building Governable ML Models with R.qmd" --to html --output index.html
+          quarto render "Package Examples.qmd" --to html --output examples.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

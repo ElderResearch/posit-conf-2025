@@ -1,4 +1,8 @@
+.quarto/
+.Rproj.user/
+.vscode/
+*_cache/
+.DS_Store
+.Rhistory
 *.html
-classifyr/
-
-/.quarto/
+*.pdf

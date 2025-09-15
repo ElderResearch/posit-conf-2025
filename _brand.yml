@@ -6,6 +6,7 @@ meta:
 
 color:
   palette:
+    darkblue: "#063157"
     mediumblue: "#005E7B"
     lightblue: "#008CA5"
     darkred: "#D0073A"
