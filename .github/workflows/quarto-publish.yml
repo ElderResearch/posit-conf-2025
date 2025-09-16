@@ -34,7 +34,11 @@ jobs:
         with:
           cache-version: 1
           quarto-version: 1.7.32
-          packages: deps::classifyr, any::sessioninfo
+          packages: |
+            deps::classifyr,
+            any::knitr,
+            any::rmarkdown,
+            any::sessioninfo
 
       - name: Render Quarto
         run: |
