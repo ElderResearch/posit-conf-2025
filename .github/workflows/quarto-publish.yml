@@ -38,7 +38,11 @@ jobs:
             deps::classifyr,
             any::knitr,
             any::rmarkdown,
+            any::devtools,
             any::sessioninfo
+
+      - name: Install Package
+        run: R -e 'devtools::install("classifyr")'
 
       - name: Render Quarto
         run: |
