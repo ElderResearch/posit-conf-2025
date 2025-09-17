@@ -6,3 +6,4 @@
 .Rhistory
 *.html
 *.pdf
+!Governable Models Slides.pdf
