@@ -25,7 +25,7 @@ format:
     toc-title: Contents
     toc-expand: true
     self-contained: true
-    link-external-icon: true
+    link-external-icon: false
     link-external-newwindow: true
     code-copy: false
     other-links:
