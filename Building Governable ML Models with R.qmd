@@ -6,13 +6,12 @@ description: |
   "Building Governable ML Models with R."
 author:
   - name: |
-      <a href="https://tshafer.com">Tom Shafer</a>,<br>
-      Principal Data Scientist
+      Tom Shafer \
+      [<i class="bi bi-globe"></i>&nbsp;Website](https://tshafer.com) &nbsp;&nbsp;
+      [<i class="bi bi-github"></i>&nbsp;GitHub](https://github.com/tomshafer) &nbsp;&nbsp;
+      [<i class="bi bi-linkedin"></i>&nbsp;LinkedIn](https://www.linkedin.com/in/tom-shafer/)
     affiliation: 
       - name: Elder Research
-        city: Raleigh
-        state: NC
-        country: USA
         url: https://www.elderresearch.com
 format:
   html:
