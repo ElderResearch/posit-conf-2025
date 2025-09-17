@@ -44,7 +44,18 @@ execute:
   cache: true
 ---
 
-<!-- Presentation video will go here when available. -->
+<style>
+div.callout { margin-top: 0; }
+</style>
+
+::: {.callout-tip}
+## Presentation Slides
+
+Presentation slides are available [here on GitHub][slides]!
+
+[slides]: https://github.com/ElderResearch/posit-conf-2025/blob/main/Governable%20Models%20Slides.pdf
+
+:::
 
 ## The talk in more detail
 
@@ -340,10 +351,10 @@ help wrangle state):
 
 ```{r, eval=FALSE}
 #| label: test-example
-test_that("Training is reproducible", {                  
-  withr::local_seed(137)                                 # <1>
-  output <- train_classifyr(iris, target = "Species")    # <2>
-  expect_snapshot(unclass(output))                       # <3>
+test_that("Training is reproducible", {
+    withr::local_seed(137) # <1>
+    output <- train_classifyr(iris, target = "Species") # <2>
+    expect_snapshot(unclass(output)) # <3>
 })
 ```
 
