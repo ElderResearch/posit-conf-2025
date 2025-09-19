@@ -100,7 +100,15 @@ created and (2) defined a new `explain` method:
 
 ```{r}
 #| label: explain-model
+#| eval: false
+explns <- explain(model, preds, iris)
+head(explns, n = 5)
+```
 
+```{r}
+#| label: explain-model-output
+#| column: body-outset-right
+#| echo: false
 explns <- explain(model, preds, iris)
 head(explns, n = 5)
 ```
