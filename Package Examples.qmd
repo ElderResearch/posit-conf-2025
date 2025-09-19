@@ -33,8 +33,10 @@ format:
       - text: Elder Research
         href: https://www.elderresearch.com
     code-links:
+      - text: GitHub Repo
+        href: https://github.com/ElderResearch/posit-conf-2025/
       - text: Example Package
-        href: https://github.com/ElderResearch/posit-conf-2025-governable-r-models/tree/main/classifyr
+        href: https://github.com/ElderResearch/posit-conf-2025/tree/main/classifyr
 execute:
   echo: true
   warning: true
