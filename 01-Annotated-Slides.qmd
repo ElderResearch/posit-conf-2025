@@ -54,7 +54,7 @@ format:
 ---
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-01.webp)
+[![](assets/slides/posit-conf-2025-01.webp)](assets/slides/posit-conf-2025-01.webp)
 
 ::: {.text}
 ### Congratulations, our model is in production!
@@ -67,7 +67,7 @@ Some enormous number of analytics projects are never deployed at _all_.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-02.webp)
+[![](assets/slides/posit-conf-2025-02.webp)](assets/slides/posit-conf-2025-02.webp)
 
 ::: {.text}
 But in practice deployment isn't the _end_ of the model's life;  it's
@@ -77,7 +77,7 @@ in production for a long time to achieve our goals.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-03.webp)
+[![](assets/slides/posit-conf-2025-03.webp)](assets/slides/posit-conf-2025-03.webp)
 
 ::: {.text}
 Typically, what happens after deployment falls under the rather stuffy
@@ -92,7 +92,7 @@ likely need to work with the model at some point in the future.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-05.webp)
+[![](assets/slides/posit-conf-2025-05.webp)](assets/slides/posit-conf-2025-05.webp)
 
 ::: {.text}
 A lot of "governance" discussion focuses on the model itself:
@@ -113,7 +113,7 @@ maintenance.
 [eri]: https://www.elderresearch.com/ "Elder Research"
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-07.webp)
+[![](assets/slides/posit-conf-2025-07.webp)](assets/slides/posit-conf-2025-07.webp)
 
 ::: {.text}
 I have centered this talk on one question: What can we do now, while
@@ -136,7 +136,7 @@ foundation for our model.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-09.webp)
+[![](assets/slides/posit-conf-2025-09.webp)](assets/slides/posit-conf-2025-09.webp)
 
 ::: {.text}
 This talk focuses on R because the project that inspired it was written
@@ -155,7 +155,7 @@ let me know you're coming from this page.
 ---
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-10.webp)
+[![](assets/slides/posit-conf-2025-10.webp)](assets/slides/posit-conf-2025-10.webp)
 
 ::: {.text}
 ### So, let's start with packaging
@@ -173,7 +173,7 @@ come up. I use packages for just about every project I take on.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-11.webp)
+[![](assets/slides/posit-conf-2025-11.webp)](assets/slides/posit-conf-2025-11.webp)
 
 ::: {.text}
 First, packages literally provide a file structure that dictates where
@@ -185,7 +185,7 @@ This avoids the "many scripts in a folder" workflow that can be tough to keep wo
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-12.webp)
+[![](assets/slides/posit-conf-2025-12.webp)](assets/slides/posit-conf-2025-12.webp)
 
 ::: {.text}
 Package also provide a list of our dependencies in the `DESCRIPTION`
@@ -196,7 +196,7 @@ our model and its scaffolding in a repeatable way.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-13.webp)
+[![](assets/slides/posit-conf-2025-13.webp)](assets/slides/posit-conf-2025-13.webp)
 
 ::: {.text}
 In addition to dependencies, `DESCRIPTION` includes key metadata,
@@ -207,7 +207,7 @@ being called and (2) the code used to train or predict from the model.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-14.webp)
+[![](assets/slides/posit-conf-2025-14.webp)](assets/slides/posit-conf-2025-14.webp)
 
 ::: {.text}
 Packaging support automation, too, in conjunction with other packages in
@@ -222,7 +222,7 @@ documentation for our package with one function call:
 [devtools]: https://devtools.r-lib.org "devtools: Tools to Make Developing R Packages Easier"
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-15.webp)
+[![](assets/slides/posit-conf-2025-15.webp)](assets/slides/posit-conf-2025-15.webp)
 
 ::: {.text}
 The devtools package also supports test discovery and execution via
@@ -231,7 +231,7 @@ The devtools package also supports test discovery and execution via
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-16.webp)
+[![](assets/slides/posit-conf-2025-16.webp)](assets/slides/posit-conf-2025-16.webp)
 
 ::: {.text}
 devtools also provides more complex functionality like
@@ -248,7 +248,7 @@ all the steps that go into making sure a codebase works.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-17.webp)
+[![](assets/slides/posit-conf-2025-17.webp)](assets/slides/posit-conf-2025-17.webp)
 
 ::: {.text}
 Packaging also helps to make conventional R patterns available for
@@ -261,7 +261,7 @@ to worry whether we are sourcing the correct files or that they are in an approp
 ---
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-18.webp)
+[![](assets/slides/posit-conf-2025-18.webp)](assets/slides/posit-conf-2025-18.webp)
 
 ::: {.text}
 ### Now, add documentation
@@ -273,7 +273,7 @@ helpful---and they can offer support over a long time in multiple ways.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-19.webp)
+[![](assets/slides/posit-conf-2025-19.webp)](assets/slides/posit-conf-2025-19.webp)
 
 ::: {.text}
 First, decent documentation is helpful across multiple time scales.
@@ -294,7 +294,7 @@ time to change something.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-20.webp)
+[![](assets/slides/posit-conf-2025-20.webp)](assets/slides/posit-conf-2025-20.webp)
 
 ::: {.text}
 But there are also really nice quality-of-life factors that even basic
@@ -310,7 +310,7 @@ immediately available when writing or updating related code.
 [Positron]: https://positron.posit.co/ "Positron: The Data Science IDE"
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-21.webp)
+[![](assets/slides/posit-conf-2025-21.webp)](assets/slides/posit-conf-2025-21.webp)
 
 ::: {.text}
 We also get nice things like inline autocompletion---even if we're using
@@ -322,7 +322,7 @@ these docs can provide helpful context.
 ---
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-22.webp)
+[![](assets/slides/posit-conf-2025-22.webp)](assets/slides/posit-conf-2025-22.webp)
 
 ::: {.text}
 ### And then there's testing
@@ -337,7 +337,7 @@ most obviously useful.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-23.webp)
+[![](assets/slides/posit-conf-2025-23.webp)](assets/slides/posit-conf-2025-23.webp)
 
 ::: {.text}
 Tests provide a safety harness for making sure key parts of our work are
@@ -357,7 +357,7 @@ happening somewhere else. Tests can help to catch issues like this.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-24.webp)
+[![](assets/slides/posit-conf-2025-24.webp)](assets/slides/posit-conf-2025-24.webp)
 
 ::: {.text}
 And it's getting easier over time to write tests. If you haven't done
@@ -373,7 +373,7 @@ simple tests to check for those bugs or to verify the new features.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-25.webp)
+[![](assets/slides/posit-conf-2025-25.webp)](assets/slides/posit-conf-2025-25.webp)
 
 ::: {.text}
 And there are really good tools for this now, including [testthat][] and
@@ -391,7 +391,7 @@ Iris data set.
 [snapshots]: https://testthat.r-lib.org/articles/snapshotting.html "Snapshot tests"
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-26.webp)
+[![](assets/slides/posit-conf-2025-26.webp)](assets/slides/posit-conf-2025-26.webp)
 
 ::: {.text}
 Next, capture the output of your function. Here, I'm testing a model
@@ -400,7 +400,7 @@ output.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-27.webp)
+[![](assets/slides/posit-conf-2025-27.webp)](assets/slides/posit-conf-2025-27.webp)
 
 ::: {.text}
 Finally, call `testthat::expect_snapshot()` with the result.
@@ -408,7 +408,7 @@ Finally, call `testthat::expect_snapshot()` with the result.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-28.webp)
+[![](assets/slides/posit-conf-2025-28.webp)](assets/slides/posit-conf-2025-28.webp)
 
 ::: {.text}
 On the first call this will write a Markdown file into your package
@@ -417,7 +417,7 @@ structure, storing what the call was, any messages, and the output.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-30.webp)
+[![](assets/slides/posit-conf-2025-30.webp)](assets/slides/posit-conf-2025-30.webp)
 
 ::: {.text}
 In future calls, then, testthat will read that Markdown file and
@@ -430,13 +430,13 @@ practice!
 :::
 :::
 
-::: {.slide-note}
-![](assets/slides/posit-conf-2025-31.webp)
-
 ---
 
+::: {.slide-note}
+[![](assets/slides/posit-conf-2025-31.webp)](assets/slides/posit-conf-2025-31.webp)
+
 ::: {.text}
-### Legible code is the icing on the cake
+### Legible code as the icing on the cake
 
 Will these three practices in place, our final step is to adopt a
 convention that help users better understand the code as they read
@@ -445,7 +445,7 @@ through it.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-32.webp)
+[![](assets/slides/posit-conf-2025-32.webp)](assets/slides/posit-conf-2025-32.webp)
 
 ::: {.text}
 This is particularly important with modeling packages, where the
@@ -463,7 +463,7 @@ logic to support model explanations for stakeholders.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-33.webp)
+[![](assets/slides/posit-conf-2025-33.webp)](assets/slides/posit-conf-2025-33.webp)
 
 ::: {.text}
 Lists and other collections offer one way to handle these kinds of
@@ -473,7 +473,7 @@ and write custom functions to work with those.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-34.webp)
+[![](assets/slides/posit-conf-2025-34.webp)](assets/slides/posit-conf-2025-34.webp)
 
 ::: {.text}
 There isn't anything too wrong with that; such a workflow can be handled
@@ -484,7 +484,7 @@ them to make predictions.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-35.webp)
+[![](assets/slides/posit-conf-2025-35.webp)](assets/slides/posit-conf-2025-35.webp)
 
 ::: {.text}
 But we already have a nice convention for how this works in R, through
@@ -500,7 +500,7 @@ system][S3], and it's really easy to adopt this ourselves in two steps.
 [S3]: https://adv-r.hadley.nz/s3.html "S3, in Advanced R (2e)"
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-36.webp)
+[![](assets/slides/posit-conf-2025-36.webp)](assets/slides/posit-conf-2025-36.webp)
 
 ::: {.text}
 First, instead of returning a simple list, return a `structure` with an
@@ -511,7 +511,7 @@ is nice.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-38.webp)
+[![](assets/slides/posit-conf-2025-38.webp)](assets/slides/posit-conf-2025-38.webp)
 
 ::: {.text}
 Given that class name, we can write our own versions of `print()`,
@@ -534,7 +534,7 @@ can make code more expressive and understandable later on.
 :::
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-39.webp)
+[![](assets/slides/posit-conf-2025-39.webp)](assets/slides/posit-conf-2025-39.webp)
 
 ::: {.text}
 If we want to, we can also extend this idea to entirely _new_ methods:
@@ -563,7 +563,7 @@ the ecosystem.
 ---
 
 ::: {.slide-note}
-![](assets/slides/posit-conf-2025-40.webp)
+[![](assets/slides/posit-conf-2025-40.webp)](assets/slides/posit-conf-2025-40.webp)
 
 ::: {.text}
 When we combine these principles together, it makes our models more

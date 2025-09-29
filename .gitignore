@@ -2,6 +2,7 @@
 .Rproj.user/
 .vscode/
 *_cache/
+*_files/
 .DS_Store
 .Rhistory
 *.html
