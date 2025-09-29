@@ -42,6 +42,8 @@ format:
     link-external-newwindow: true
     code-copy: false
     other-links:
+      - text: Annotated Slides
+        href: ./index.html
       - text: Package Demo
         href: ./examples.html
       - text: Elder Research

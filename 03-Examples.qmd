@@ -28,8 +28,10 @@ format:
     link-external-newwindow: true
     code-copy: false
     other-links:
-      - text: Talk Supplement
-        href: ./
+      - text: Annotated Slides
+        href: ./index.html
+      - text: More Details
+        href: ./details.html
       - text: Elder Research
         href: https://www.elderresearch.com
     code-links:
